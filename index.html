@@ -97,6 +97,11 @@
     .report-list { grid-template-columns: 1fr !important; }
     .about-grid { gap: 32px !important; }
     .form-sidebar { position: static !important; }
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+
+  @media (max-width: 600px) {
+    .portfolio-grid { grid-template-columns: 1fr !important; }
   }
 
   @media (max-width: 720px) {
@@ -1513,6 +1518,125 @@ function AboutMe() {
 }
 
 // =====================================================================
+// Portfolio.jsx — Tidigare Uppdrag (Variant A — Clean Logo Wall)
+// =====================================================================
+
+const portfolioClients = [
+  {
+    name: "Convini",
+    logo: "assets/clients/convini.svg",
+    aspect: "wide",
+    sector: "Foodtech / B2B",
+    role: "Processutveckling & skalbar drift",
+    short: "Kartlade hela packningsflödet med dataanalys, identifierade flaskhalsar och byggde en skalbar processdesign som höjde lönsamheten markant.",
+  },
+  {
+    name: "EZETO",
+    logo: "assets/clients/ezeto.png",
+    aspect: "wide",
+    sector: "SaaS",
+    role: "Lead-nurturing & CRM-automation",
+    short: "Byggde automatiserade lead-flöden i Pipedrive och HubSpot via Zapier som kvalificerade inkommande trafik från kampanjerna.",
+  },
+  {
+    name: "PM Moto",
+    logo: "assets/clients/pm-moto.jpg",
+    aspect: "square",
+    dark: true,
+    sector: "Automotive / Service",
+    role: "Smart bokningsautomation",
+    short: "Byggde ett intelligent bokningsflöde som estimerade åtgärdstid, hittade lediga slots och briefade kund och mekaniker automatiskt.",
+  },
+  {
+    name: "Profit Media",
+    logo: "assets/clients/profit-media.png",
+    aspect: "wide",
+    sector: "Digital marknadsföring",
+    role: "Leveransinfrastruktur för byråkunder",
+    short: "Byggde konverteringsoptimerade leadsidor åt byråns kunder, så teamet kunde fokusera på strategi i stället för produktion.",
+  },
+];
+
+function PortfolioLogoBox({ src, alt, aspect, dark }) {
+  return (
+    <div style={{
+      background: dark ? "#1F1F22" : "var(--color-bg)",
+      border: dark ? "1px solid #1F1F22" : "1px solid var(--color-border)",
+      borderRadius: 10,
+      padding: aspect === "square" ? 8 : 12,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: 80,
+    }}>
+      <img src={src} alt={alt + " logo"} style={{ maxHeight: 56, maxWidth: "100%", objectFit: "contain", display: "block" }} />
+    </div>
+  );
+}
+
+function PortfolioCard({ client }) {
+  return (
+    <div style={{
+      background: "var(--color-surface)",
+      border: "1px solid var(--color-border)",
+      borderRadius: 14,
+      padding: 24,
+      display: "flex",
+      flexDirection: "column",
+      gap: 16,
+    }}>
+      <PortfolioLogoBox src={client.logo} alt={client.name} aspect={client.aspect} dark={client.dark} />
+      <div style={{
+        fontSize: 11,
+        fontWeight: 500,
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
+        color: "var(--color-primary)",
+      }}>
+        {client.sector}
+      </div>
+      <div style={{
+        fontSize: 15,
+        fontWeight: 600,
+        letterSpacing: "-0.01em",
+        color: "var(--color-text)",
+        lineHeight: 1.3,
+      }}>
+        {client.role}
+      </div>
+      <p style={{
+        fontSize: 13.5,
+        lineHeight: 1.55,
+        color: "var(--color-text-muted)",
+        margin: 0,
+      }}>
+        {client.short}
+      </p>
+    </div>
+  );
+}
+
+function Portfolio() {
+  return (
+    <Section bg="bg" id="tidigare-uppdrag">
+      <Container>
+        <div style={{ textAlign: "center", maxWidth: 680, margin: "0 auto 40px" }}>
+          <Eyebrow>Företag jag jobbat med</Eyebrow>
+          <h2 style={{ fontSize: "clamp(26px, 3vw, 36px)", lineHeight: 1.2, letterSpacing: "-0.02em", fontWeight: 700, margin: 0, color: "var(--color-text)" }}>
+            Tidigare Uppdrag
+          </h2>
+        </div>
+        <div className="portfolio-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
+          {portfolioClients.map((c) => (
+            <PortfolioCard key={c.name} client={c} />
+          ))}
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+// =====================================================================
 // Faq.jsx
 // =====================================================================
 
@@ -1740,6 +1864,7 @@ function App() {
       <Process />
       <ForWhom />
       <AboutMe />
+      <Portfolio />
       <Faq />
       <LeadForm />
       <Footer />

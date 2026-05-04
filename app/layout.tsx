@@ -90,7 +90,7 @@ const organizationSchema = {
     jobTitle: "Grundare",
     url: `${SITE_URL}/om-oss`,
     image: `${SITE_URL}/assets/edvin.jpg`,
-    sameAs: ["https://linkedin.com/in/edvin-gollungberg"],
+    sameAs: ["https://www.linkedin.com/in/edvingollungberg/"],
   },
   address: {
     "@type": "PostalAddress",

@@ -5,7 +5,7 @@ import { Icon } from "@/components/Icon";
 const SITE_URL = "https://agenifyai.com";
 const PAGE_PATH = "/om-oss";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
-const LINKEDIN_URL = "https://linkedin.com/in/edvin-gollungberg";
+const LINKEDIN_URL = "https://www.linkedin.com/in/edvingollungberg/";
 
 const TITLE = "Om Agenify AI och Edvin Gollungberg";
 const DESCRIPTION =
@@ -260,9 +260,9 @@ function Bio() {
             Vägen till Agenify
           </h2>
           <p style={{ fontSize: 18, lineHeight: 1.65, color: "var(--color-text)", margin: "0 0 20px" }}>
-            Edvin pluggar psykologi vid Lunds universitet. Innan Agenify drev han egna projekt
+            Jag pluggar psykologi vid Lunds universitet. Innan Agenify drev jag egna projekt
             inom webbdesign och B2B-sälj som frilans, främst för svenska tjänsteföretag som ville
-            ha snabbare flöden från lead till bokat möte. Han grundade Agenify AI 2024.
+            ha snabbare flöden från lead till bokat möte. Jag grundade Agenify AI 2024.
           </p>
           <p style={{ fontSize: 18, lineHeight: 1.65, color: "var(--color-text)", margin: "0 0 32px" }}>
             Agenify bygger AI-driven lead-reaktivering, speed-to-lead-system och CRM-automation.
@@ -320,16 +320,16 @@ function Disclosure() {
             Hur Agenify använder AI i sitt eget innehåll
           </h2>
           <p style={{ fontSize: 17, lineHeight: 1.65, color: "var(--color-text)", margin: "0 0 16px" }}>
-            Agenify bygger på AI, så det vore underligt att låtsas annat. AI används för
+            Agenify bygger på AI, så det vore underligt att låtsas annat. Jag använder AI för
             research och första utkast på artiklar, LinkedIn-inlägg och guider.
           </p>
           <p style={{ fontSize: 17, lineHeight: 1.65, color: "var(--color-text)", margin: "0 0 16px" }}>
-            Edvin granskar och redigerar varje publicerat inlägg innan det går ut. Han
-            kontrollerar fakta, byter ut formuleringar som inte låter som honom och tar bort
+            Jag granskar och redigerar varje publicerat inlägg innan det går ut. Jag
+            kontrollerar fakta, byter ut formuleringar som inte låter som mig och tar bort
             allt som inte stämmer med hur Agenify faktiskt jobbar.
           </p>
           <p style={{ fontSize: 17, lineHeight: 1.65, color: "var(--color-text)", margin: 0 }}>
-            Allt innehåll publiceras under Edvins riktiga namn med länk till hans LinkedIn.
+            Allt innehåll publiceras under mitt riktiga namn med länk till min LinkedIn.
             Det är ett medvetet val, både för att möta Googles krav på AI-transparens 2026
             och för att läsare ska veta vem som står bakom orden.
           </p>

@@ -98,7 +98,6 @@
 
 /* ============================================================
    Semantic type styles
-   Use these classes OR target the raw elements.
    ============================================================ */
 
 html, body {
@@ -109,7 +108,13 @@ html, body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
 }
+
+#__next, body { min-height: 100vh; }
+* { box-sizing: border-box; }
 
 .t-display, h1.display {
   font-size: var(--fs-display);
@@ -195,7 +200,98 @@ a:hover {
   color: var(--color-primary-hover);
 }
 
-/* Mobile scale (≤720px) */
+/* ============================================================
+   Component styles (migrated from index.html <style>)
+   ============================================================ */
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.nav-link {
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 120ms ease-out;
+}
+.nav-link:hover { color: var(--color-primary); }
+
+.tf-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--color-text);
+  transition: border-color 120ms ease-out, box-shadow 120ms ease-out;
+  outline: none;
+}
+textarea.tf-input { height: auto; padding: 12px 14px; line-height: 1.5; }
+.tf-input::placeholder { color: var(--color-text-subtle); }
+.tf-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(50, 104, 178, 0.15);
+}
+select.tf-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A8BA0' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.submit-btn {
+  margin-top: 8px;
+  width: 100%;
+  height: 52px;
+  background: var(--color-primary);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 120ms ease-out;
+}
+.submit-btn:hover { background: var(--color-primary-hover); }
+.submit-btn:active { background: var(--color-primary-active); }
+
+input[type="range"] { height: 20px; }
+
+/* Mobile breakpoints */
+@media (max-width: 900px) {
+  .nav-links { display: none !important; }
+  .problem-grid,
+  .process-grid,
+  .forwhom-grid,
+  .report-grid,
+  .form-grid,
+  .about-grid,
+  .calc-grid,
+  .form-row {
+    grid-template-columns: 1fr !important;
+  }
+  .report-list { grid-template-columns: 1fr !important; }
+  .about-grid { gap: 32px !important; }
+  .form-sidebar { position: static !important; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (max-width: 600px) {
+  .portfolio-grid { grid-template-columns: 1fr !important; }
+}
+
 @media (max-width: 720px) {
   :root {
     --fs-display: 48px;
@@ -203,4 +299,22 @@ a:hover {
     --fs-h2: 32px;
     --fs-h3: 24px;
   }
+
+  section { padding: 64px 0 !important; }
+
+  /* Hide decorative sidebars; let workflow canvas span full width */
+  .report-mock-toolbox,
+  .report-mock-inspector { display: none !important; }
+
+  /* Collapse 3-col grid to a single column and drop forced height */
+  .report-mock-body {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    gap: 8px !important;
+  }
+
+  /* Tighten outer chrome and surrounding spacing */
+  .report-mock { padding: 10px !important; }
+  .report-header { margin-bottom: 32px !important; }
+  .report-list { margin-top: 28px !important; gap: 10px !important; }
 }

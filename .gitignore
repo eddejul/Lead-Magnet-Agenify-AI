@@ -1,6 +1,26 @@
+# dependencies
 node_modules/
-temporary screenshots/
-.playwright-mcp/
+.pnp
+.pnp.js
+
+# next.js
+.next/
+out/
+build/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# misc
 .DS_Store
 Thumbs.db
-*.log
+.env*.local
+.vercel
+.playwright-mcp/
+temporary screenshots/
+
+# typescript
+*.tsbuildinfo

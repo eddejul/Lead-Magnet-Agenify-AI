@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { Icon } from "./Icon";
 import { FAQ_ITEMS } from "@/lib/faq";
 
@@ -2558,6 +2558,28 @@ function ThankYou() {
 const LEADS_WEBHOOK_URL =
   "https://script.google.com/macros/s/AKfycbxtPCH1LnJOI7NG9YqiXoEEO98wMMHlI1FnzdnkgCr_ABESmwfc0YIFX_hI9a45k6trZA/exec";
 
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content"] as const;
+type UtmKey = (typeof UTM_KEYS)[number];
+type UtmState = Record<UtmKey, string>;
+const EMPTY_UTM: UtmState = { utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "" };
+
+const readSession = (key: string): string => {
+  if (typeof window === "undefined") return "";
+  try {
+    return window.sessionStorage.getItem(key) ?? "";
+  } catch {
+    return "";
+  }
+};
+const writeSession = (key: string, value: string): void => {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(key, value);
+  } catch {
+    // sessionStorage unavailable (Safari private mode, disabled storage) — ignore
+  }
+};
+
 type LeadFormState = {
   name: string;
   email: string;
@@ -2579,6 +2601,19 @@ function LeadForm() {
     niche: "",
     bottleneck: "",
   });
+  const [utm, setUtm] = useState<UtmState>(EMPTY_UTM);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const next: UtmState = { ...EMPTY_UTM };
+    UTM_KEYS.forEach((k) => {
+      const fromUrl = params.get(k);
+      if (fromUrl) writeSession(k, fromUrl);
+      next[k] = fromUrl ?? readSession(k);
+    });
+    setUtm(next);
+  }, []);
+
   const update =
     (k: keyof LeadFormState) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -2597,6 +2632,10 @@ function LeadForm() {
           ...form,
           submittedAt: new Date().toISOString(),
           page: typeof window !== "undefined" ? window.location.href : "",
+          utm_source: utm.utm_source || "direct",
+          utm_medium: utm.utm_medium,
+          utm_campaign: utm.utm_campaign,
+          utm_content: utm.utm_content,
         }),
       });
       setSubmitted(true);

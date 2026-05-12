@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { FAQ_ITEMS } from "@/lib/faq";
 import "./globals.css";
 
@@ -160,6 +161,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );
